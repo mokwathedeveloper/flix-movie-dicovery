@@ -142,44 +142,7 @@ const HomePage = () => {
         onViewAll={() => handleViewAll('upcomingMovies')}
       />
 
-      {/* Feature Highlights */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="card text-center">
-          <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-            <TrendingUp className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-          </div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-            Discover Trending
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 text-sm">
-            Stay up to date with the latest trending movies and TV shows from around the world.
-          </p>
-        </div>
 
-        <div className="card text-center">
-          <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Star className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-          </div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-            Personal Watchlist
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 text-sm">
-            Create and manage your personal watchlist to keep track of what you want to watch.
-          </p>
-        </div>
-
-        <div className="card text-center">
-          <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Clock className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-          </div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-            Track Progress
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 text-sm">
-            Mark movies and shows as watched, currently watching, or want to watch.
-          </p>
-        </div>
-      </div>
     </div>
   )
 }
