@@ -56,9 +56,47 @@ The build process generates a `dist` directory containing:
 - Service worker for PWA functionality
 - Web app manifest for installation
 
+## Public Demo Deployment
+
+### Setting Up Public Demo (Recommended: Netlify)
+
+The project includes configuration for deploying a public demo that users can access without needing their own API keys. This is ideal for showcasing the application's capabilities.
+
+**Prerequisites for Demo Deployment:**
+- Demo TMDB API key (separate from personal keys)
+- Demo OMDB API key (separate from personal keys)
+- Hosting platform account (Netlify recommended)
+
+**Demo Environment Configuration:**
+```env
+# Demo-specific environment variables
+VITE_TMDB_API_KEY=demo_tmdb_api_key_here
+VITE_OMDB_API_KEY=demo_omdb_api_key_here
+VITE_ENABLE_PWA=true
+VITE_ENABLE_ANALYTICS=false
+VITE_APP_NAME="FLIX Movie Discovery - Demo"
+```
+
+**Netlify Demo Deployment Steps:**
+1. Fork or clone the repository
+2. Connect repository to Netlify
+3. Configure build settings:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+   - Node version: `18`
+4. Add environment variables in Netlify dashboard
+5. Deploy and test functionality
+6. Update README.md with live demo URL
+
+**Demo Limitations:**
+- Limited API rate limits (shared demo keys)
+- Watchlist data stored locally only
+- No user authentication
+- Analytics disabled for privacy
+
 ## Deployment Platforms
 
-### Vercel Deployment (Recommended)
+### Vercel Deployment
 
 **Automatic Deployment**
 1. Push your code to a GitHub repository
@@ -351,6 +389,49 @@ npm run build -- --optimize-images
 3. Confirm API key security
 4. Validate input sanitization
 
+## Public Demo Maintenance
+
+### Demo-Specific Maintenance Tasks
+- Monitor demo API key usage and limits
+- Ensure demo functionality remains accessible
+- Update demo environment variables as needed
+- Monitor demo site performance and uptime
+- Respond to user feedback about demo issues
+
+### Demo API Key Management
+**Best Practices:**
+- Use separate API keys for demo deployment
+- Set appropriate rate limits for demo keys
+- Monitor usage to prevent quota exhaustion
+- Rotate demo keys periodically for security
+- Document demo key configuration
+
+**TMDB Demo Key Setup:**
+1. Create separate TMDB account for demo
+2. Generate API key with appropriate limits
+3. Configure key in deployment environment
+4. Monitor usage in TMDB dashboard
+
+**OMDB Demo Key Setup:**
+1. Obtain demo-specific OMDB API key
+2. Configure with reasonable daily limits
+3. Monitor usage to prevent service interruption
+
+### Demo Deployment Monitoring
+**Key Metrics to Track:**
+- Site uptime and availability
+- API response times and error rates
+- User engagement and feature usage
+- Build success/failure rates
+- Performance metrics (Lighthouse scores)
+
+**Monitoring Tools:**
+- Netlify Analytics (if using Netlify)
+- Vercel Analytics (if using Vercel)
+- Google PageSpeed Insights
+- Uptime monitoring services
+- Error tracking (optional)
+
 ## Maintenance and Updates
 
 ### Regular Maintenance Tasks
@@ -359,19 +440,22 @@ npm run build -- --optimize-images
 - Review and rotate API keys
 - Monitor application performance
 - Check for security vulnerabilities
+- Maintain demo deployment accessibility
 
 ### Update Deployment Process
 1. Test updates in staging environment
 2. Create backup of current deployment
 3. Deploy updates to production
 4. Verify functionality post-deployment
-5. Monitor for issues and rollback if necessary
+5. Update demo deployment if needed
+6. Monitor for issues and rollback if necessary
 
 ### Rollback Procedures
 - Maintain previous build artifacts
 - Document rollback procedures
 - Test rollback process regularly
 - Monitor application after rollback
+- Ensure demo deployment remains functional
 
 ## Troubleshooting
 

@@ -1,6 +1,28 @@
 # FLIX Movie Discovery Platform
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://flix-movie-discovery.netlify.app)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/mokwathedeveloper/flix-movie-discovery/deploy-demo.yml?style=for-the-badge&logo=github)](https://github.com/mokwathedeveloper/flix-movie-discovery/actions)
+[![License](https://img.shields.io/github/license/mokwathedeveloper/flix-movie-discovery?style=for-the-badge)](LICENSE)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-4.5-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+
 FLIX is a comprehensive movie and TV show discovery application built with modern web technologies. The platform provides users with an intuitive interface to search, discover, and manage their entertainment preferences through advanced filtering, personalized recommendations, and detailed analytics.
+
+## Live Demo
+
+**[View Live Demo](https://flix-movie-discovery.netlify.app)** *(Coming Soon)*
+
+> **Note:** The live demo will be available once the public deployment is set up. The demo will include sample data and limited functionality to showcase the application's features without requiring personal API keys.
+
+### Demo Features
+- Browse trending movies and TV shows
+- Search functionality with real-time results
+- Advanced filtering and sorting options
+- Responsive design across all devices
+- Progressive Web App (PWA) capabilities
+- Watchlist features (local storage only in demo)
+- Limited API calls (demo environment)
 
 ## Overview
 
@@ -426,7 +448,7 @@ VITE_CACHE_DURATION=300000
 
 MIT License
 
-Copyright (c) 2025 FLIX Movie Discovery Platform
+Copyright (c) 2025 mokwathedeveloper (moffatmokwa12@gmail.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

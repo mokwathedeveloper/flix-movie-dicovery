@@ -4,7 +4,11 @@
   "description": "A comprehensive movie and TV show discovery platform with advanced search, personalized recommendations, and watchlist management",
   "type": "module",
   "private": false,
-  "author": "FLIX Development Team",
+  "author": {
+    "name": "mokwathedeveloper",
+    "email": "moffatmokwa12@gmail.com",
+    "url": "https://github.com/mokwathedeveloper"
+  },
   "license": "MIT",
   "homepage": "https://github.com/mokwathedeveloper/flix-movie-discovery#readme",
   "repository": {
