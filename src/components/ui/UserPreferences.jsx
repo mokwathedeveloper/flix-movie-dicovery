@@ -5,13 +5,43 @@ import usePWA from '../../hooks/usePWA'
 import { getFromStorage, setToStorage, STORAGE_KEYS } from '../../utils/localStorage'
 
 const UserPreferences = ({ onClose }) => {
-  const { theme, setTheme, availableThemes, autoTheme, toggleAutoTheme } = useTheme()
-  const { 
-    requestNotificationPermission, 
-    subscribeToPush, 
+  // Safely get theme context with fallback
+  let themeContext
+  try {
+    themeContext = useTheme()
+  } catch (error) {
+    console.error('Theme context error:', error)
+    themeContext = {
+      theme: 'light',
+      setTheme: () => {},
+      availableThemes: ['light', 'dark'],
+      autoTheme: false,
+      toggleAutoTheme: () => {}
+    }
+  }
+
+  const { theme, setTheme, availableThemes, autoTheme, toggleAutoTheme } = themeContext
+
+  // Safely get PWA context with fallback
+  let pwaContext
+  try {
+    pwaContext = usePWA()
+  } catch (error) {
+    console.error('PWA context error:', error)
+    pwaContext = {
+      requestNotificationPermission: async () => 'not-supported',
+      subscribeToPush: async () => null,
+      unsubscribeFromPush: async () => false,
+      getPushSubscription: async () => null
+    }
+  }
+
+  const {
+    requestNotificationPermission,
+    subscribeToPush,
     unsubscribeFromPush,
-    getPushSubscription 
-  } = usePWA()
+    getPushSubscription
+  } = pwaContext
 
   const [preferences, setPreferences] = useState({
     // Display preferences
@@ -44,20 +74,28 @@ const UserPreferences = ({ onClose }) => {
 
   // Load preferences on mount
   useEffect(() => {
-    const savedPreferences = getFromStorage(STORAGE_KEYS.USER_PREFERENCES, {})
-    setPreferences(prev => ({ ...prev, ...savedPreferences }))
+    try {
+      const savedPreferences = getFromStorage(STORAGE_KEYS.USER_PREFERENCES, {})
+      setPreferences(prev => ({ ...prev, ...savedPreferences }))
+    } catch (error) {
+      console.error('Failed to load preferences:', error)
+    }
   }, [])
 
   // Check notification status
   useEffect(() => {
     const checkNotificationStatus = async () => {
-      const subscription = await getPushSubscription()
-      setPreferences(prev => ({
-        ...prev,
-        enableNotifications: !!subscription
-      }))
+      try {
+        const subscription = await getPushSubscription()
+        setPreferences(prev => ({
+          ...prev,
+          enableNotifications: !!subscription
+        }))
+      } catch (error) {
+        console.error('Failed to check notification status:', error)
+      }
     }
-    
+
     checkNotificationStatus()
   }, [getPushSubscription])
 
@@ -75,15 +113,19 @@ const UserPreferences = ({ onClose }) => {
   }
 
   const handleNotificationToggle = async () => {
-    if (preferences.enableNotifications) {
-      await unsubscribeFromPush()
-      handlePreferenceChange('enableNotifications', false)
-    } else {
-      const permission = await requestNotificationPermission()
-      if (permission === 'granted') {
-        await subscribeToPush()
-        handlePreferenceChange('enableNotifications', true)
+    try {
+      if (preferences.enableNotifications) {
+        await unsubscribeFromPush()
+        handlePreferenceChange('enableNotifications', false)
+      } else {
+        const permission = await requestNotificationPermission()
+        if (permission === 'granted') {
+          await subscribeToPush()
+          handlePreferenceChange('enableNotifications', true)
+        }
       }
+    } catch (error) {
+      console.error('Failed to toggle notifications:', error)
     }
   }
 

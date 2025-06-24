@@ -5,6 +5,7 @@
 const STORAGE_KEYS = {
   WATCHLIST: 'flix_watchlist',
   THEME: 'flix_theme',
+  AUTO_THEME: 'flix_auto_theme',
   USER_PREFERENCES: 'flix_user_preferences'
 }
 

@@ -17,38 +17,61 @@ export const ThemeProvider = ({ children }) => {
     return getFromStorage(STORAGE_KEYS.THEME, 'light')
   })
 
+  const [autoTheme, setAutoTheme] = useState(() => {
+    // Get auto theme preference from localStorage
+    return getFromStorage(STORAGE_KEYS.AUTO_THEME, false)
+  })
+
+  const availableThemes = ['light', 'dark', 'system']
+
   // Apply theme to document
   useEffect(() => {
     const root = document.documentElement
-    
-    if (theme === 'dark') {
+    let effectiveTheme = theme
+
+    // If auto theme is enabled or theme is 'system', use system preference
+    if (autoTheme || theme === 'system') {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      effectiveTheme = mediaQuery.matches ? 'dark' : 'light'
+    }
+
+    if (effectiveTheme === 'dark') {
       root.classList.add('dark')
     } else {
       root.classList.remove('dark')
     }
-    
+
     // Save theme preference
     setToStorage(STORAGE_KEYS.THEME, theme)
-  }, [theme])
+    setToStorage(STORAGE_KEYS.AUTO_THEME, autoTheme)
+  }, [theme, autoTheme])
 
   // Listen for system theme changes
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    
+
     const handleChange = (e) => {
-      // Only auto-switch if user hasn't manually set a preference
-      const savedTheme = getFromStorage(STORAGE_KEYS.THEME)
-      if (!savedTheme) {
-        setTheme(e.matches ? 'dark' : 'light')
+      // Only auto-switch if auto theme is enabled or theme is 'system'
+      if (autoTheme || theme === 'system') {
+        const root = document.documentElement
+        if (e.matches) {
+          root.classList.add('dark')
+        } else {
+          root.classList.remove('dark')
+        }
       }
     }
 
     mediaQuery.addEventListener('change', handleChange)
     return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [])
+  }, [autoTheme, theme])
 
   const toggleTheme = () => {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
+  }
+
+  const toggleAutoTheme = () => {
+    setAutoTheme(prev => !prev)
   }
 
   const setLightTheme = () => setTheme('light')
@@ -56,10 +79,14 @@ export const ThemeProvider = ({ children }) => {
 
   const value = {
     theme,
+    setTheme,
     toggleTheme,
     setLightTheme,
     setDarkTheme,
-    isDark: theme === 'dark'
+    isDark: theme === 'dark',
+    availableThemes,
+    autoTheme,
+    toggleAutoTheme
   }
 
   return (
