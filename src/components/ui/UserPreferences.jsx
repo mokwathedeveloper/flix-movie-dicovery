@@ -168,30 +168,30 @@ const UserPreferences = ({ onClose }) => {
   }
 
   const PreferenceSection = ({ title, icon: Icon, children }) => (
-    <div className="space-y-4">
-      <div className="flex items-center space-x-2 pb-2 border-b border-gray-200 dark:border-gray-700">
-        <Icon className="w-5 h-5 text-primary-600" />
+    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+      <div className="flex items-center space-x-2 pb-3 mb-4 border-b border-gray-200 dark:border-gray-700">
+        <Icon className="w-5 h-5 text-primary-600 flex-shrink-0" />
         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{title}</h3>
       </div>
-      <div className="space-y-3">
+      <div className="space-y-4">
         {children}
       </div>
     </div>
   )
 
   const PreferenceItem = ({ label, description, children }) => (
-    <div className="flex items-center justify-between py-2">
-      <div className="flex-1">
-        <label className="text-sm font-medium text-gray-900 dark:text-gray-100">
+    <div className="flex flex-col space-y-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+      <div className="flex-1 min-w-0">
+        <label className="text-sm font-medium text-gray-900 dark:text-gray-100 block">
           {label}
         </label>
         {description && (
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 break-words">
             {description}
           </p>
         )}
       </div>
-      <div className="ml-4">
+      <div className="flex-shrink-0 sm:ml-4">
         {children}
       </div>
     </div>
@@ -202,14 +202,14 @@ const UserPreferences = ({ onClose }) => {
       onClick={() => !disabled && onChange(!checked)}
       disabled={disabled}
       className={`
-        relative inline-flex h-6 w-11 items-center rounded-full transition-colors
+        relative inline-flex h-7 w-12 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800
         ${checked ? 'bg-primary-600' : 'bg-gray-200 dark:bg-gray-700'}
-        ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+        ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-primary-700'}
       `}
     >
       <span
         className={`
-          inline-block h-4 w-4 transform rounded-full bg-white transition-transform
+          inline-block h-5 w-5 transform rounded-full bg-white transition-transform shadow-lg
           ${checked ? 'translate-x-6' : 'translate-x-1'}
         `}
       />
@@ -217,30 +217,30 @@ const UserPreferences = ({ onClose }) => {
   )
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8 px-4 sm:px-0">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
         <div className="flex items-center space-x-3">
           <Settings className="w-6 h-6 text-primary-600" />
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
             User Preferences
           </h2>
         </div>
-        
-        <div className="flex items-center space-x-3">
+
+        <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3">
           <button
             onClick={handleReset}
-            className="flex items-center space-x-2 px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+            className="flex items-center justify-center space-x-2 px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Reset</span>
           </button>
-          
+
           <button
             onClick={handleSave}
             disabled={!hasChanges || saving}
             className={`
-              flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors
+              flex items-center justify-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors
               ${hasChanges && !saving
                 ? 'bg-primary-600 text-white hover:bg-primary-700'
                 : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed'
@@ -262,7 +262,7 @@ const UserPreferences = ({ onClose }) => {
           <select
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
-            className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            className="w-full sm:w-auto px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm"
           >
             {availableThemes.map((themeName) => (
               <option key={themeName} value={themeName}>
@@ -289,7 +289,7 @@ const UserPreferences = ({ onClose }) => {
           <select
             value={preferences.defaultView}
             onChange={(e) => handlePreferenceChange('defaultView', e.target.value)}
-            className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            className="w-full sm:w-auto px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm"
           >
             <option value="grid">Grid</option>
             <option value="list">List</option>
@@ -306,7 +306,7 @@ const UserPreferences = ({ onClose }) => {
           <select
             value={preferences.preferredLanguage}
             onChange={(e) => handlePreferenceChange('preferredLanguage', e.target.value)}
-            className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            className="w-full sm:w-auto px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm"
           >
             <option value="en">English</option>
             <option value="es">Spanish</option>
@@ -325,7 +325,7 @@ const UserPreferences = ({ onClose }) => {
           <select
             value={preferences.preferredRegion}
             onChange={(e) => handlePreferenceChange('preferredRegion', e.target.value)}
-            className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            className="w-full sm:w-auto px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm"
           >
             <option value="US">United States</option>
             <option value="GB">United Kingdom</option>
@@ -418,7 +418,7 @@ const UserPreferences = ({ onClose }) => {
           <select
             value={preferences.exportFormat}
             onChange={(e) => handlePreferenceChange('exportFormat', e.target.value)}
-            className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            className="w-full sm:w-auto px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm"
           >
             <option value="json">JSON</option>
             <option value="csv">CSV</option>
