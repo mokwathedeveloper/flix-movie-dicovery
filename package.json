@@ -6,13 +6,13 @@
   "private": false,
   "author": "FLIX Development Team",
   "license": "MIT",
-  "homepage": "https://github.com/your-username/flix-movie-discovery#readme",
+  "homepage": "https://github.com/mokwathedeveloper/flix-movie-discovery#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-username/flix-movie-discovery.git"
+    "url": "git+https://github.com/mokwathedeveloper/flix-movie-discovery.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/flix-movie-discovery/issues"
+    "url": "https://github.com/mokwathedeveloper/flix-movie-discovery/issues"
   },
   "keywords": [
     "movie",

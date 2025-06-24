@@ -153,4 +153,4 @@ This project follows Semantic Versioning (SemVer):
 ---
 
 For more information about releases and updates, visit the project repository at:
-https://github.com/your-username/flix-movie-discovery
+https://github.com/mokwathedeveloper/flix-movie-discovery

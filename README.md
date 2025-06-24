@@ -75,7 +75,7 @@ This application serves as a complete entertainment discovery solution, offering
 
 1. **Repository Setup**
 ```bash
-git clone https://github.com/your-username/flix-movie-discovery.git
+git clone https://github.com/mokwathedeveloper/flix-movie-discovery.git
 cd flix-movie-discovery
 npm install
 ```

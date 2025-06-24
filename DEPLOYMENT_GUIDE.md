@@ -23,7 +23,7 @@ This guide provides comprehensive instructions for deploying the FLIX Movie Disc
 ### Local Build
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/flix-movie-discovery.git
+git clone https://github.com/mokwathedeveloper/flix-movie-discovery.git
 cd flix-movie-discovery
 
 # Install dependencies
