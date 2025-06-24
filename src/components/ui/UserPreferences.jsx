@@ -100,7 +100,11 @@ const UserPreferences = ({ onClose }) => {
   }, [getPushSubscription])
 
   const handlePreferenceChange = (key, value) => {
-    setPreferences(prev => ({ ...prev, [key]: value }))
+    setPreferences(prev => {
+      const newPrefs = { ...prev, [key]: value }
+      console.log('Preference changed:', key, value) // Debug log
+      return newPrefs
+    })
     setHasChanges(true)
   }
 
@@ -222,15 +226,22 @@ const UserPreferences = ({ onClose }) => {
       <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
         <div className="flex items-center space-x-3">
           <Settings className="w-6 h-6 text-primary-600" />
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
-            User Preferences
-          </h2>
+          <div>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
+              User Preferences
+            </h2>
+            {hasChanges && (
+              <p className="text-sm text-orange-600 dark:text-orange-400 mt-1">
+                You have unsaved changes
+              </p>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3">
           <button
             onClick={handleReset}
-            className="flex items-center justify-center space-x-2 px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="flex items-center justify-center space-x-2 px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-all duration-200 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Reset</span>
@@ -240,14 +251,14 @@ const UserPreferences = ({ onClose }) => {
             onClick={handleSave}
             disabled={!hasChanges || saving}
             className={`
-              flex items-center justify-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors
+              flex items-center justify-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 min-w-[120px]
               ${hasChanges && !saving
-                ? 'bg-primary-600 text-white hover:bg-primary-700'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                ? 'bg-primary-600 text-white hover:bg-primary-700 hover:shadow-md transform hover:scale-105 cursor-pointer'
+                : 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed opacity-60'
               }
             `}
           >
-            <Save className="w-4 h-4" />
+            <Save className={`w-4 h-4 ${saving ? 'animate-spin' : ''}`} />
             <span>{saving ? 'Saving...' : 'Save Changes'}</span>
           </button>
         </div>
@@ -261,7 +272,10 @@ const UserPreferences = ({ onClose }) => {
         >
           <select
             value={theme}
-            onChange={(e) => setTheme(e.target.value)}
+            onChange={(e) => {
+              setTheme(e.target.value)
+              setHasChanges(true)
+            }}
             className="w-full sm:w-auto px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm"
           >
             {availableThemes.map((themeName) => (
@@ -278,7 +292,10 @@ const UserPreferences = ({ onClose }) => {
         >
           <Toggle
             checked={autoTheme}
-            onChange={toggleAutoTheme}
+            onChange={() => {
+              toggleAutoTheme()
+              setHasChanges(true)
+            }}
           />
         </PreferenceItem>
 
