@@ -1,0 +1,85 @@
+MIT License
+
+Copyright (c) 2025 FLIX Movie Discovery Platform
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+THIRD-PARTY LICENSES AND ATTRIBUTIONS
+
+This software includes components from the following third-party sources:
+
+React
+Copyright (c) Facebook, Inc. and its affiliates.
+Licensed under the MIT License.
+
+TailwindCSS
+Copyright (c) Tailwind Labs, Inc.
+Licensed under the MIT License.
+
+Lucide React
+Copyright (c) Lucide Contributors
+Licensed under the ISC License.
+
+Vite
+Copyright (c) 2019-present, Yuxi (Evan) You and Vite contributors
+Licensed under the MIT License.
+
+React Router
+Copyright (c) React Training LLC
+Licensed under the MIT License.
+
+DATA SOURCES
+
+The Movie Database (TMDB)
+This product uses the TMDB API but is not endorsed or certified by TMDB.
+TMDB data is used under their terms of service.
+
+Open Movie Database (OMDB)
+This product uses the OMDB API under their terms of service.
+OMDB data is used for supplementary rating information.
+
+DISCLAIMER
+
+This software is provided for educational and entertainment purposes only.
+The developers are not responsible for any misuse of the software or any
+damages that may result from its use. Users are responsible for complying
+with all applicable laws and regulations when using this software.
+
+The movie and TV show data provided through this application is sourced
+from third-party APIs and the accuracy, completeness, or reliability of
+this data is not guaranteed. The developers are not responsible for any
+errors or omissions in the data provided.
+
+PRIVACY NOTICE
+
+This application processes data locally on the user's device and does not
+collect or transmit personal information to external servers except as
+necessary for API functionality. Users should review the privacy policies
+of third-party services (TMDB, OMDB) for information about their data
+practices.
+
+SUPPORT AND MAINTENANCE
+
+This software is provided as-is without warranty of any kind. While the
+developers strive to maintain and improve the software, there is no
+guarantee of ongoing support or maintenance. Users are encouraged to
+contribute to the project through the official repository.
+
+For questions, issues, or contributions, please visit:
+https://github.com/mokwathedeveloper/flix-movie-discovery
