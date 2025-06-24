@@ -48,7 +48,7 @@ omdbApi.interceptors.response.use(
 
 // Utility functions
 export const getImageUrl = (path, size = 'w500') => {
-  if (!path) return '/placeholder-movie.jpg'
+  if (!path) return '/placeholder-movie.svg'
   return `${TMDB_IMAGE_BASE_URL}/${size}${path}`
 }
 

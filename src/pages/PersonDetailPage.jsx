@@ -1,0 +1,236 @@
+import React, { useState, useEffect } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { ArrowLeft, Calendar, MapPin, Star, Film, Tv } from 'lucide-react'
+import tmdbService from '../services/tmdbService'
+import LoadingSpinner from '../components/common/LoadingSpinner'
+import ErrorBoundary from '../components/ui/ErrorBoundary'
+import MovieCard from '../components/ui/MovieCard'
+import { getImageUrl } from '../services/api'
+
+const PersonDetailPage = () => {
+  const { id } = useParams()
+  const [person, setPerson] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    const fetchPersonDetails = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        const data = await tmdbService.getPersonDetails(id)
+        setPerson(data)
+      } catch (err) {
+        setError('Failed to load person details')
+        console.error('Error fetching person details:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (id) {
+      fetchPersonDetails()
+    }
+  }, [id])
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <LoadingSpinner size="lg" />
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-12">
+        <div className="text-red-500 mb-4">{error}</div>
+        <Link
+          to="/"
+          className="inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Back to Home</span>
+        </Link>
+      </div>
+    )
+  }
+
+  if (!person) {
+    return (
+      <div className="text-center py-12">
+        <div className="text-gray-500 mb-4">Person not found</div>
+        <Link
+          to="/"
+          className="inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Back to Home</span>
+        </Link>
+      </div>
+    )
+  }
+
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Unknown'
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  }
+
+  const movieCredits = person.movie_credits?.cast?.slice(0, 12) || []
+  const tvCredits = person.tv_credits?.cast?.slice(0, 12) || []
+
+  return (
+    <div className="max-w-7xl mx-auto">
+      {/* Back Button */}
+      <Link
+        to="/"
+        className="inline-flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors mb-6"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        <span>Back to Home</span>
+      </Link>
+
+      {/* Person Header */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        {/* Profile Image */}
+        <div className="lg:col-span-1">
+          <div className="sticky top-8">
+            <img
+              src={getImageUrl(person.profile_path)}
+              alt={person.name}
+              className="w-full rounded-2xl shadow-lg"
+              onError={(e) => {
+                e.target.src = '/placeholder-movie.svg'
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Person Info */}
+        <div className="lg:col-span-2">
+          <div className="space-y-6">
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                {person.name}
+              </h1>
+              {person.known_for_department && (
+                <p className="text-lg text-primary-600 dark:text-primary-400">
+                  {person.known_for_department}
+                </p>
+              )}
+            </div>
+
+            {/* Personal Details */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {person.birthday && (
+                <div className="flex items-center space-x-3">
+                  <Calendar className="w-5 h-5 text-gray-400" />
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Born</p>
+                    <p className="text-gray-900 dark:text-gray-100">
+                      {formatDate(person.birthday)}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {person.place_of_birth && (
+                <div className="flex items-center space-x-3">
+                  <MapPin className="w-5 h-5 text-gray-400" />
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Place of Birth</p>
+                    <p className="text-gray-900 dark:text-gray-100">
+                      {person.place_of_birth}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {person.popularity && (
+                <div className="flex items-center space-x-3">
+                  <Star className="w-5 h-5 text-gray-400" />
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Popularity</p>
+                    <p className="text-gray-900 dark:text-gray-100">
+                      {person.popularity.toFixed(1)}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Biography */}
+            {person.biography && (
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                  Biography
+                </h2>
+                <div className="prose dark:prose-invert max-w-none">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    {person.biography}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Movie Credits */}
+      {movieCredits.length > 0 && (
+        <ErrorBoundary>
+          <div className="mb-12">
+            <div className="flex items-center space-x-3 mb-6">
+              <Film className="w-6 h-6 text-primary-600" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                Known For (Movies)
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {movieCredits.map((movie) => (
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  size="sm"
+                />
+              ))}
+            </div>
+          </div>
+        </ErrorBoundary>
+      )}
+
+      {/* TV Credits */}
+      {tvCredits.length > 0 && (
+        <ErrorBoundary>
+          <div className="mb-12">
+            <div className="flex items-center space-x-3 mb-6">
+              <Tv className="w-6 h-6 text-primary-600" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                Known For (TV Shows)
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {tvCredits.map((show) => (
+                <MovieCard
+                  key={show.id}
+                  movie={{
+                    ...show,
+                    title: show.name,
+                    release_date: show.first_air_date
+                  }}
+                  size="sm"
+                />
+              ))}
+            </div>
+          </div>
+        </ErrorBoundary>
+      )}
+    </div>
+  )
+}
+
+export default PersonDetailPage
