@@ -1,15 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { 
-  Film, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Facebook, 
-  Twitter, 
-  Linkedin, 
+import {
+  Film,
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Linkedin,
   Github,
-  Heart,
   ExternalLink
 } from 'lucide-react'
 
@@ -74,12 +73,12 @@ const Footer = () => {
     },
     {
       icon: Phone,
-      text: '+1 (555) 123-4567',
-      href: 'tel:+15551234567'
+      text: '+254724745666',
+      href: 'tel:+254724745666'
     },
     {
       icon: MapPin,
-      text: 'San Francisco, CA',
+      text: 'Kenya, Nairobi',
       href: null
     }
   ]
@@ -209,15 +208,9 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="border-t border-gray-200 dark:border-gray-700 mt-12 pt-8">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+          <div className="flex flex-col items-center justify-center text-center">
             <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400">
               <span>&copy; {currentYear} Flix. All rights reserved.</span>
-            </div>
-
-            <div className="flex items-center space-x-1 text-sm text-gray-600 dark:text-gray-400">
-              <span>Made with</span>
-              <Heart className="w-4 h-4 text-red-500 fill-current" />
-              <span>by the Flix team</span>
             </div>
           </div>
         </div>
