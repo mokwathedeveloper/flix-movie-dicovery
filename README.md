@@ -1,10 +1,12 @@
 # FLIX Movie Discovery Platform
 
-[FLIX ](https://flix-movie-discovery.vercel.app/)is a comprehensive movie and TV show discovery application built with modern web technologies. The platform provides users with an intuitive interface to search, discover, and manage their entertainment preferences through advanced filtering, personalized recommendations, and detailed analytics.
+[FLIX ](https://flix-movie-discovery.vercel.app/) is a comprehensive movie and TV show discovery application built with modern web technologies. The platform provides users with an intuitive interface to search, discover, and manage their entertainment preferences through advanced filtering, personalized recommendations, and detailed analytics.
 
 ## Overview
 
 This application serves as a complete entertainment discovery solution, offering real-time search capabilities, trending content exploration, and personal watchlist management. Built with React 18 and powered by The Movie Database (TMDB) API, [FLIX ](https://flix-movie-discovery.vercel.app/) delivers a responsive, accessible, and feature-rich user experience across all devices.
+
+> **🚀 Live Demo**: [https://flix-movie-discovery.vercel.app/](https://flix-movie-discovery.vercel.app/) - Experience the full application with updated footer and contact information.
 
 ## Core Features
 
